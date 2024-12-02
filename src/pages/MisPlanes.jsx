@@ -2,7 +2,7 @@ import React from 'react'
 
 const MisPlanes = () => {
   return (
-    <div>MisPlanes</div>
+    <h1 className='h1__page'>Itinerarios</h1>
   )
 }
 

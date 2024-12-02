@@ -4,7 +4,7 @@ import FormularioContacto from '../components/FormularioContacto'
 const Contactos = () => {
   return (
    <div>
-     <h1>Contactos</h1>
+     <h1 className='h1__page'>Contacto</h1>
     <FormularioContacto/>
    </div>
   )

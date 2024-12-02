@@ -5,7 +5,7 @@ import LoginForm from '../components/LoginForm'
 const Login = () => {
   return (
     <div>
-        <h1>Login</h1>
+        <h1 className='h1__page'>Iniciar Sesion</h1>
         <LoginForm/>
     </div>
   )

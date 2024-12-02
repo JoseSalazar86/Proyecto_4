@@ -2,13 +2,16 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: monospace;
+    font-family: 'Inter', sans-serif;
 }
 :root{
     font-size: 16px;
+    --color-primario:rgba(176, 187, 234, 1);
+    --color-secundario: rgba(230, 233, 248, 1);
+    --color-fondo: rgba(210, 217, 252, 1);
 }
 body{
-    background-color: rgba(210, 217, 252, 1);
+    background-color: var(--color-fondo);
 }
 /*----------------------------------
 Reset
@@ -20,20 +23,82 @@ a{
 
 
 
-
-
+/*----------------------------------
+H1
+----------------------------------*/
+.h1__page{
+    text-align: center;
+    padding: 4rem;
+}
 /*----------------------------------
 Header
 ----------------------------------*/
 .encabezado{
     width: 100%;
     display: flex;
-    justify-content: space-around;
-    background:linear-gradient(50deg,rgba(176, 187, 234, 1),rgba(230, 233, 248, 1));
+    justify-content: space-between;
+    padding: 1rem 2.5rem;
+    background: radial-gradient(circle, var(--color-primario), var(--color-secundario));
+    align-items: center;
+    border-bottom: 1px solid blue;
+    position:relative;
 }
+.cabecera__tituloh1{
+    position: absolute;
+    top: 1rem;
+    left: 10rem;
+    font-family: "Island Moments", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 48px;
+}
+.cabecera__tituloh2{
+    position: absolute;
+    top: 3.5rem;
+    left: 11rem;
+    font-family: "Island Moments", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 36px;
+}
+.nav__menu{
+    display: flex;
+    position: absolute;
+    gap: 1rem; 
+    top: 4rem;
+    left: 50rem;
+}
+.nav__menu a {
+    color: black;
+}
+.btn{
+    background: var(--color-primario);
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    margin-left: 10px;
+}
+.btn-login{
+    position: absolute;
+    top:3.5rem;
+    right: 10rem;
+}
+.btn-register{
+    position: absolute;
+    top:3.5rem;
+    right: 2.5rem;
+}
+.darkMode{
+    position: absolute;
+    top: 1rem;
+    right: 2.5rem;
+    cursor: pointer;
+    transition: all ease 0.5s;
 
-
-
+}
 
 /*----------------------------------
 Footer
@@ -41,25 +106,33 @@ Footer
 footer{
     width: 100%;
     display: flex;
-    justify-content: space-around;
-    background:linear-gradient(50deg,rgba(176, 187, 234, 1),rgba(230, 233, 248, 1));
+    justify-content: space-between;
+    padding: 1rem 2.5rem;
+    background: radial-gradient(circle, var(--color-primario), var(--color-secundario));
+    align-items: center;
+    border-top: 1px solid blue;
+    position:relative;
 }
+/*----------------------------------
+Button
+----------------------------------*/
+
 
 /*----------------------------------
 Formulario
 ----------------------------------*/
-h1{
-    text-align: center;
+.form-container{
+    max-width: 600px;
+    padding: 2rem;
+    background: radial-gradient(circle, var(--color-primario), var(--color-secundario));
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
 }
 
-
-.form-container {
+.main-container{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 2%;
-    padding: 2%;
-    background: linear-gradient(30deg,rgba(176, 187, 234, 1),rgba(230, 233, 248, 1)) ;
-    width: 50%;
-    border: 1em;
-    }
+    min-height: 80.5vh;
+    position: relative;
+}

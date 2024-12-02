@@ -1,81 +1,116 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { login } from '../config/Firebase'
+import { Link, useNavigate } from 'react-router-dom'
+import { UserContext } from '../context/UserContext'
+import { Formik } from 'formik'
+import * as Yup from 'yup'
+import { Avatar, Box, Button, TextField, Typography } from '@mui/material'
+import { LoadingButton } from '@mui/lab'
+
 
 const LoginForm = () => {
-  const [todo,setTodo] = useState({
-    email:"",
-    password:""
-  })
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const {email,password } = todo;
+  const {user} = useContext(UserContext);
 
-    // Validación de los campos
-    if (!email.trim() || !password.trim()) {
-      return Swal.fire({
-        icon: "warning",
-        title: "Oops",
-        text: "Todos los campos son obligatorios",
-      });
-    }
+  const navigate = useNavigate()
 
-    Swal.fire({
-      icon: "success",
-      title: "Login",
-      text: "Iniciando Sesion.",
-    });
+  useEffect(() => {
+      if(user) navigate ("/dashboard")
+  }, [user])
 
-    // Reiniciar el formulario
-    setTodo({
-      email: "",
-      password:"",
-    });
-  };
+  const onSubmit = async ({email,password},{setSubmitting, setErrors, resetForm }) => {
+      try{
+          await login({email,password})
+          console.log("User logged in")
+          resetForm()
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setTodo({
-      ...todo,
-      [name]:value,
-    });
-  };
-  const handleCancel = () =>{
-    setTodo({
-      email:"",
-      password:""
-    })
+      }catch (error) {
+          if(error.code === "auth/invalid-credential")
+              return setErrors({credentials:"Credenciales inválidas"})
+          
+      }
+      finally {
+          setSubmitting(false)
+      }
+      
   }
-  return (
-    <div>
-        <form onSubmit={handleSubmit}>
-          <div className='mb-3'>
-            <label htmlFor="email" className='form-label'>
-              Email:
-            </label>
-            <input type="text" 
-            className='form-control' 
-            id='email' 
-            name='email'
-            value={todo.email}
-            onClick={handleChange} />
-          </div>
-          <div className='mb-3'>
-            <label htmlFor="password" 
-            className='form-label'>
-              Contraseña:
-            </label>
-            <input type="text" 
-            className='form-control' 
-            id='password' 
-            name='password'
-            value={todo.password} 
-            onClick={handleChange}/>
-          </div>
-        </form>
-        <button type='submit' className='btn btn-primary'>Aceptar</button>
-        <button type='submit' className='btn btn-primary' onClick={handleCancel}>Cancelar</button>
-    </div>
-  )
+
+  const validationSchema = Yup.object().shape({
+      email:Yup.string().trim().email('Email no válido').required("El campo email es requerido"),
+      password:Yup.string().trim().min(6,"Mínimo 6 caracteres").required("El campo password es requerido")
+  })
+return(
+  <Box className="form-container">
+        <Formik
+            initialValues={{email:'test@test.com',password:'123456'}}
+            onSubmit={onSubmit}
+            validationSchema={validationSchema}
+        >
+            {
+                ({ values, handleChange, handleSubmit, isSubmitting, handleBlur, errors, touched })=>(
+                <Box 
+                    sx={{mt:1}}
+                    component={'form'}
+                    onSubmit={handleSubmit}>
+                    <TextField
+                        type='text'
+                        placeholder='email@email.com'
+                        value={values.email}
+                        onChange={handleChange}
+                        name='email'
+                        onBlur={handleBlur}
+                        id='email'
+                        label='Introduce el email'
+                        fullWidth
+                        sx={{mb:3}}
+                        error={errors.email && touched.email}
+                        helperText={errors.email && touched.email && errors.email}
+                    />
+                    
+                    <TextField
+                        type='password'
+                        placeholder='password'
+                        value={values.password}
+                        onChange={handleChange}
+                        name='password'
+                        onBlur={handleBlur}
+                        id='password'
+                        label='Introduce el password'
+                        fullWidth
+                        sx={{mb:3}}
+                        error={errors.password && touched.password}
+                        helperText={errors.password && touched.password && errors.password}
+                    />
+
+                    <LoadingButton
+                        variant="contained"
+                        type="submit"
+                        disabled={isSubmitting}
+                        loading={isSubmitting}
+                        fullWidth
+                        sx={{mb:3}}
+                    >
+                        Acceder
+                    </LoadingButton>
+                
+                    <Button 
+                        fullWidth
+                        component={Link}
+                        to={"/Register"}
+                        type='submit' 
+                        disabled={isSubmitting}
+                    >¿No tienes cuenta? Registrate
+                    </Button>
+
+                    {
+                    errors.credentials && <p>{errors.credentials}</p>
+                    }
+                </Box>
+                )
+            } 
+        </Formik>     
+    </Box>
+)
 }
 
 export default LoginForm

@@ -8,7 +8,7 @@ const LayoutPublic = () => {
   return (
     <div>
       <Header/>
-      <main>
+      <main className="main-container">
         <Outlet/>
       </main>
       <Footer/>

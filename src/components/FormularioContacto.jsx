@@ -1,198 +1,162 @@
-import React, { useState } from "react";
-import Swal from "sweetalert2";
+import React from "react";
+import { Avatar, Box, TextField, Button, Typography } from "@mui/material";
+import { Formik } from "formik";
+import * as Yup from "yup"; // Importamos Yup para validaciones
+
+
 
 const FormularioContacto = () => {
-  const [todo, setTodo] = useState({
-    nombre: "",
-    apellido: "",
-    email: "",
-    asunto: "",
-    usuario: false,
-    cajaTexto: "",
-  });
+ // Validaciones con Yup
+ const validationSchema = Yup.object({
+  nombre: Yup.string()
+    .required("El nombre es obligatorio")
+    .min(2, "El nombre debe tener al menos 2 caracteres"),
+  apellido: Yup.string()
+    .required("El apellido es obligatorio")
+    .min(2, "El apellido debe tener al menos 2 caracteres"),
+  email: Yup.string()
+    .email("Debe ser un email válido")
+    .required("El email es obligatorio"),
+  asunto: Yup.string().required("Selecciona un asunto"),
+  cajaTexto: Yup.string()
+    .required("La consulta es obligatoria")
+    .min(10, "La consulta debe tener al menos 10 caracteres"),
+});
 
-  const [errores, setErrores] = useState({
-    nombre: "",
-    apellido: "",
-    email: "",
-    asunto: "",
-    cajaTexto: "",
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const { nombre, apellido, email, asunto, cajaTexto } = todo;
-
-    // Validación de los campos
-    if (nombre.trim().length < 3) {
-      setErrores((prev) => ({ ...prev, nombre: "El nombre debe tener al menos 3 caracteres." }));
-      return;
-    }
-
-    if (apellido.trim().length < 3) {
-      setErrores((prev) => ({ ...prev, apellido: "El apellido debe tener al menos 3 caracteres." }));
-      return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setErrores((prev) => ({ ...prev, email: "Por favor, ingresa un email válido." }));
-      return;
-    }
-
-    if (asunto === "") {
-      setErrores((prev) => ({ ...prev, asunto: "Por favor, selecciona un asunto." }));
-      return;
-    }
-
-    if (cajaTexto.trim().length === 0) {
-      setErrores((prev) => ({ ...prev, cajaTexto: "Por favor, escribe tu consulta en el campo de texto." }));
-      return;
-    }
-
-    // Mensaje de éxito
-    Swal.fire({
-      icon: "success",
-      title: "Formulario enviado",
-      text: "Gracias por tu consulta. Te responderemos pronto.",
-    });
-
-    // Reiniciar el formulario
-    setTodo({
-      nombre: "",
-      apellido: "",
-      email: "",
-      asunto: "",
-      usuario: false,
-      cajaTexto: "",
-    });
-
-    setErrores({});
-  };
-
-  const handleBlur = (e) => {
-    const { name, value } = e.target;
-
-    // Validar individualmente cada campo
-    if (name === "nombre" && value.trim().length < 3) {
-      setErrores((prev) => ({ ...prev, nombre: "El nombre debe tener al menos 3 caracteres." }));
-    } else if (name === "apellido" && value.trim().length < 3) {
-      setErrores((prev) => ({ ...prev, apellido: "El apellido debe tener al menos 3 caracteres." }));
-    } else if (name === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-      setErrores((prev) => ({ ...prev, email: "Por favor, ingresa un email válido." }));
-    } else if (name === "asunto" && value === "") {
-      setErrores((prev) => ({ ...prev, asunto: "Por favor, selecciona un asunto." }));
-    } else if (name === "cajaTexto" && value.trim().length === 0) {
-      setErrores((prev) => ({ ...prev, cajaTexto: "Por favor, escribe tu consulta en el campo de texto." }));
-    } else {
-      // Limpiar error si el campo es válido
-      setErrores((prev) => ({ ...prev, [name]: "" }));
-    }
-  };
-
-  const handleChange = (e) => {
-    const { name, value, checked, type } = e.target;
-    setTodo({
-      ...todo,
-      [name]: type === "checkbox" ? checked : value,
-    });
-  };
+// Acción al enviar el formulario
+const onSubmit = (values) => {
+  console.log("Datos enviados:", values);
+};
 
   return (
-    <div className="form-container">
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="nombre" className="form-label">
-            Nombre:
-          </label>
-          <input
+    <Box className="form-container"> 
+   
+    {/* Formulario con Formik */}
+    <Formik
+      initialValues={{
+        nombre: "",
+        apellido: "",
+        email: "",
+        asunto: "",
+        cajaTexto: "",
+      }}
+      onSubmit={onSubmit}
+      validationSchema={validationSchema}
+    >
+      {({
+        values,
+        handleChange,
+        handleSubmit,
+        handleBlur,
+        errors,
+        touched,
+        isSubmitting,
+      }) => (
+        <Box
+          component={"form"}
+          onSubmit={handleSubmit}
+         
+        >
+          {/* Campo Nombre */}
+          <TextField
             type="text"
-            className="form-control"
-            id="nombre"
+            placeholder="Nombre"
+            value={values.nombre}
+            onChange={handleChange}
             name="nombre"
-            value={todo.nombre}
-            onChange={handleChange}
             onBlur={handleBlur}
+            id="nombre"
+            label="Introduce tu Nombre"
+            fullWidth
+            error={Boolean(errors.nombre && touched.nombre)}
+            helperText={touched.nombre && errors.nombre}
           />
-          {errores.nombre && <p className="text-danger">{errores.nombre}</p>}
-        </div>
 
-        <div className="mb-3">
-          <label htmlFor="apellido" className="form-label">
-            Apellidos:
-          </label>
-          <input
+          {/* Campo Apellido */}
+          <TextField
             type="text"
-            className="form-control"
-            id="apellido"
+            placeholder="Apellidos"
+            value={values.apellido}
+            onChange={handleChange}
             name="apellido"
-            value={todo.apellido}
-            onChange={handleChange}
             onBlur={handleBlur}
+            id="apellido"
+            label="Introduce tus Apellidos"
+            fullWidth
+            error={Boolean(errors.apellido && touched.apellido)}
+            helperText={touched.apellido && errors.apellido}
           />
-          {errores.apellido && <p className="text-danger">{errores.apellido}</p>}
-        </div>
 
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email:
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="email"
-            name="email"
-            value={todo.email}
+          {/* Campo Email */}
+          <TextField
+            type='text'
+            placeholder='email@email.com'
+            value={values.email}
             onChange={handleChange}
+            name='email'
             onBlur={handleBlur}
+            id='email'
+            label='Introduce el email'
+            fullWidth
+            error={errors.email && touched.email}
+            helperText={errors.email && touched.email && errors.email}
           />
-          {errores.email && <p className="text-danger">{errores.email}</p>}
-        </div>
 
-        <div className="mb-3">
-          <label htmlFor="asunto" className="form-label">
-            Asunto:
-          </label>
-          <select
-            className="form-select"
+          {/* Campo Asunto */}
+          <TextField
+            select
+            label="Selecciona un Asunto"
             name="asunto"
-            id="asunto"
-            value={todo.asunto}
+            value={values.asunto}
             onChange={handleChange}
             onBlur={handleBlur}
+            fullWidth
+            error={Boolean(errors.asunto && touched.asunto)}
+            helperText={touched.asunto && errors.asunto}
           >
             <option value="">Selecciona un asunto</option>
             <option value="otros">Otros</option>
             <option value="guardar_perfil">Guardar perfil</option>
             <option value="pagina_busqueda">Página de búsqueda</option>
-            <option value="problema_itinerario">Problemas al cargar tu itinerario</option>
-            <option value="problema_inicio_sesion">Problemas al iniciar sesión</option>
+            <option value="problema_itinerario">
+              Problemas al cargar tu itinerario
+            </option>
+            <option value="problema_inicio_sesion">
+              Problemas al iniciar sesión
+            </option>
             <option value="olvido_contrasena">Olvidó su contraseña</option>
-          </select>
-          {errores.asunto && <p className="text-danger">{errores.asunto}</p>}
-        </div>
+          </TextField>
 
-        <div className="mb-3">
-          <label htmlFor="cajaTexto" className="form-label">
-            Indícanos tu consulta:
-          </label>
-          <textarea
-            className="form-control"
-            name="cajaTexto"
-            id="cajaTexto"
-            value={todo.cajaTexto}
+          {/* Campo Consulta */}
+          <TextField
+            multiline
+            rows={4}
+            placeholder="Describe tu consulta"
+            value={values.cajaTexto}
             onChange={handleChange}
+            name="cajaTexto"
             onBlur={handleBlur}
-          ></textarea>
-          {errores.cajaTexto && <p className="text-danger">{errores.cajaTexto}</p>}
-        </div>
+            id="cajaTexto"
+            label="Consulta"
+            fullWidth
+            error={Boolean(errors.cajaTexto && touched.cajaTexto)}
+            helperText={touched.cajaTexto && errors.cajaTexto}
+          />
 
-        <button type="submit" className="btn btn-primary">
-          Enviar
-        </button>
-      </form>
-    </div>
-  );
-};
+          {/* Botón Enviar */}
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            disabled={isSubmitting}
+          >
+            Enviar
+          </Button>
+        </Box>
+      )}
+    </Formik>
+  </Box>
+  )
+}
 
 export default FormularioContacto;

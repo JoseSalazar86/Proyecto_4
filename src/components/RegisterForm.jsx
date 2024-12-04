@@ -5,7 +5,6 @@ import { UserContext } from '../context/UserContext'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { Avatar, Box, Button, TextField, Typography } from '@mui/material'
-import LoginIcon from '@mui/icons-material/Login';
 import { LoadingButton } from '@mui/lab'
 
 const RegisterForm = () => {
@@ -15,7 +14,7 @@ const RegisterForm = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-      if(user) navigate ("/dashboard")
+      if(user) navigate ("/")
   }, [user])
 
   const onSubmit = async ({email,password},{setSubmitting, setErrors, resetForm }) => {
@@ -41,14 +40,6 @@ const RegisterForm = () => {
   })
   return (
     <Box sx={{mt:"1rem",maxWidth:"400px",textAlign:"center"}}>
-    <Avatar sx={{mx:"auto",bgcolor:"#111"}}>
-        <LoginIcon/>
-    </Avatar>
-    <Typography
-        variant='h5'
-        component="h1"
-    >Registro
-    </Typography>
     <Formik
         initialValues={{email:'test@test.com',password:'123456'}}
         onSubmit={onSubmit}

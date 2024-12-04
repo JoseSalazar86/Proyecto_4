@@ -28,14 +28,35 @@ export const auth = getAuth(app);
 
 //Login
 
-export const login = ({email, password}) =>{
-    return signInWithEmailAndPassword(auth,email,password)
-}
-
+export const login = async ({ email, password }) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      return userCredential.user; // Retorna el usuario en caso de éxito
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error.message);
+      throw error; // Lanza el error para que el frontend pueda manejarlo
+    }
+  };
+  
 //Registro
-
-export const register = ({email,password,repeatPassword}) =>{
-    return createUserWithEmailAndPassword(auth,email,password)
-}
-
-export const logOut = () => signOut(auth)
+export const register = async ({ email, password }) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      return userCredential.user;
+    } catch (error) {
+      console.error("Error al registrar usuario:", error.message);
+      throw error;
+    }
+  };
+  
+//Logout
+export const logOut = async () => {
+    try {
+      await signOut(auth);
+      console.log("Sesión cerrada exitosamente.");
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error.message);
+      throw error;
+    }
+  };
+  

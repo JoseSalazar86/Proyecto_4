@@ -15,7 +15,7 @@ const LoginForm = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-      if(user) navigate ("/dashboard")
+      if(user) navigate ("/")
   }, [user])
 
   const onSubmit = async ({email,password},{setSubmitting, setErrors, resetForm }) => {

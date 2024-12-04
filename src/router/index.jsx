@@ -42,6 +42,14 @@ export const router = createBrowserRouter([
                 path:"/Register",
                 element:<Register/>,
             
+            },
+            {
+                path:"/Destinos",
+                element:<Destinos/>
+            },
+            {
+                path:"/Ciudades",
+               
             }
         ]
     }

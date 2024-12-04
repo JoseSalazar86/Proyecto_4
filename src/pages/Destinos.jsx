@@ -1,10 +1,10 @@
 import React from 'react'
-import Destin from '../components/Destin'
+import Countries from '../components/Countries'
 
 const Destinos = () => {
   return (
     <>
-    <Destin/>
+    <Countries/>
     </>
   )
 }

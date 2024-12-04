@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Box, TextField, Button, Typography } from "@mui/material";
+import { Avatar, Box, TextField, Button} from "@mui/material";
 import { Formik } from "formik";
 import * as Yup from "yup"; // Importamos Yup para validaciones
 
@@ -29,6 +29,8 @@ const onSubmit = (values) => {
 };
 
   return (
+    <>
+    <h1>Contacto</h1>
     <Box className="form-container"> 
    
     {/* Formulario con Formik */}
@@ -156,6 +158,7 @@ const onSubmit = (values) => {
       )}
     </Formik>
   </Box>
+  </>
   )
 }
 

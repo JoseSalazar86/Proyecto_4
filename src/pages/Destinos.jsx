@@ -1,8 +1,11 @@
 import React from 'react'
+import Destin from '../components/Destin'
 
 const Destinos = () => {
   return (
-    <h1 className='h1__page'>Destinos</h1>
+    <>
+    <Destin/>
+    </>
   )
 }
 

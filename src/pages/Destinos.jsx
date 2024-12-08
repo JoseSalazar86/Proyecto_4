@@ -1,11 +1,12 @@
 import React from 'react'
-import Countries from '../components/Countries'
+import InfoPais from '../components/InfoPais'
 
 const Destinos = () => {
   return (
     <>
-    <Countries/>
+      <InfoPais/>
     </>
+    
   )
 }
 

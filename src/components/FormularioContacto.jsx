@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Box, TextField, Button} from "@mui/material";
+import { Avatar, Box, TextField, Button, MenuItem} from "@mui/material";
 import { Formik } from "formik";
 import * as Yup from "yup"; // Importamos Yup para validaciones
 
@@ -62,14 +62,12 @@ const onSubmit = (values) => {
           {/* Campo Nombre */}
           <TextField
             type="text"
-            placeholder="Nombre"
             value={values.nombre}
             onChange={handleChange}
             name="nombre"
             onBlur={handleBlur}
             id="nombre"
             label="Introduce tu Nombre"
-            fullWidth
             error={Boolean(errors.nombre && touched.nombre)}
             helperText={touched.nombre && errors.nombre}
           />
@@ -112,21 +110,17 @@ const onSubmit = (values) => {
             value={values.asunto}
             onChange={handleChange}
             onBlur={handleBlur}
-            fullWidth
+
             error={Boolean(errors.asunto && touched.asunto)}
             helperText={touched.asunto && errors.asunto}
           >
-            <option value="">Selecciona un asunto</option>
-            <option value="otros">Otros</option>
-            <option value="guardar_perfil">Guardar perfil</option>
-            <option value="pagina_busqueda">Página de búsqueda</option>
-            <option value="problema_itinerario">
-              Problemas al cargar tu itinerario
-            </option>
-            <option value="problema_inicio_sesion">
-              Problemas al iniciar sesión
-            </option>
-            <option value="olvido_contrasena">Olvidó su contraseña</option>
+            <MenuItem value="">Selecciona un asunto</MenuItem>
+            <MenuItem value="otros">Otros</MenuItem>
+            <MenuItem value="guardar_perfil">Guardar perfil</MenuItem>
+            <MenuItem value="pagina_busqueda">Página de búsqueda</MenuItem>
+            <MenuItem value="problema_itinerario">Problemas al cargar tu itinerario</MenuItem>
+            <MenuItem value="problema_inicio_sesion">Problemas al iniciar sesión</MenuItem>
+            <MenuItem value="olvido_contrasena">Olvidó su contraseña</MenuItem>
           </TextField>
 
           {/* Campo Consulta */}

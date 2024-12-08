@@ -1,8 +1,11 @@
 import React from 'react'
+import UserItinerario from '../components/Useritinerario'
 
 const MisPlanes = () => {
   return (
-    <h1 className='h1__page'>Itinerarios</h1>
+    <>
+    <UserItinerario/>
+    </>
   )
 }
 

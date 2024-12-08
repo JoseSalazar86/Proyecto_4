@@ -1,12 +1,26 @@
 import React from 'react';
-import mapaDelMundo from '../assets/mapa-del-mundo.jpg'
+import { useNavigate } from 'react-router-dom';
+import banderaMundo from '../assets/mapa-del-mundo.jpg';
+
 const Inicio = () => {
+  const navigate = useNavigate();
+  
+  const handleLogin = () => {
+    navigate('/login');
+  };
+
+  const handleRegister = () => {
+    navigate('/register');
+  };
+
   return (
-    <main className='contenedor__inicio'>
+    <main className="contenedor__inicio">
       <section className="hero">
-        <img src={mapaDelMundo} alt="mapaMundi" />
-        <h1>Planifica tus vacaciones con facilidad</h1>
+        
+        <img src={banderaMundo} alt="bandera del mundo" />
+        <h2>Vacay Time</h2>
         <p>Planifica tus vacaciones de manera sencilla y visual con nuestra aplicación.</p>
+        <button onClick={handleLogin}>¡Comienza a planificar ahora!</button>
       </section>
 
       <section className="features">
@@ -47,7 +61,7 @@ const Inicio = () => {
 
       <section className="call-to-action">
         <h2>¡Comienza a planificar tus vacaciones ahora!</h2>
-        <button>¡Regístrate ahora!</button>
+        <button onClick={handleRegister}>¡Regístrate ahora!</button>
         <p>Descarga nuestra aplicación en la App Store o Google Play.</p>
       </section>
     </main>

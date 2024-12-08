@@ -4,15 +4,23 @@
     padding: 0;
     font-family: 'Inter', sans-serif;
 }
-
 :root {
     font-size: 16px;
     --color-primario: rgba(176, 187, 234, 1);
     --color-secundario: rgba(230, 233, 248, 1);
     --color-fondo: rgba(210, 217, 252, 1);
-    --corlor-primarioDark:rgba(30, 30, 30, 1);
-    --color-secundarioDark:rgba(50, 50, 50, 1);
+    --color-primarioDark: rgba(30, 30, 30, 1);
+    --color-secundarioDark: rgba(50, 50, 50, 1);
     --color-sombra: rgba(0, 0, 0, 0.1); /* Color de sombra */
+}
+
+/* Modo oscuro */
+[data-theme='dark'] {
+    --color-primario: rgba(50, 50, 50, 1);
+    --color-secundario: rgba(30, 30, 30, 1);
+    --color-fondo: rgba(20, 20, 20, 1);
+    --color-sombra: rgba(0, 0, 0, 0.5); /* Sombra más intensa en modo oscuro */
+    --color-text: rgba(255, 255, 255, 1);
 }
 
 body {
@@ -43,18 +51,20 @@ Header
 
 .cabecera__tituloh1 {
     font-family: "Island Moments", cursive;
+    color: var(--color-primarioDark);
     font-weight: 400;
     font-size: 48px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombra de texto */
-
 }
-
 
 .cabecera__tituloh2 {
     font-family: "Island Moments", cursive;
     font-weight: 400;
     font-size: 36px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombra de texto */
+    position: absolute;
+    left: 10rem;
+    top: 4.5rem;
 }
 
 .nav__menu {
@@ -75,7 +85,7 @@ Header
 }
 
 /*----------------------------------
-Botones de login y registro
+Botones
 ----------------------------------*/
 .btn {
     background: var(--color-primario);
@@ -90,25 +100,22 @@ Botones de login y registro
 }
 
 .btn:hover {
-    background: rgba(176, 187, 234, 0.8); /* Color al pasar el ratón */
+    background: rgb(105, 121, 248); 
+    color: #FCFCFC;
     transform: translateY(-2px); /* Efecto de elevación */
 }
 
-.btn__login{
+.btn__login {
     position: absolute;
     bottom: 1rem;
     right: 10rem;
-   
 }
-
 
 .btn__register {
     position: absolute;
     bottom: 1rem;
     right: 3rem;
-   
 }
-
 /*----------------------------------
 boton darkmode
 ----------------------------------*/
@@ -162,7 +169,9 @@ boton darkmode
 .theme-checkbox:checked {
     background-position: 100%;
 }
-
+/*----------------------------------
+Footer
+----------------------------------*/
 footer {
     width: 100%;
     display: flex;
@@ -170,41 +179,90 @@ footer {
     padding: 1rem 2.5rem;
     background: radial-gradient(circle, var(--color-primario), var(--color-secundario));
     align-items: center;
-    position: relative;
     box-shadow: 0 -2px 10px var(--color-sombra); /* Sombra en el footer */
 }
-
-/*----------------------------------
-Button
-----------------------------------*/
-
-
+/* CSS básico para el footer */
+  .redes__sociales {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+  }
+  
+  .redes__sociales li {
+    display: inline-block;
+  }
+  
+  .redes__sociales img {
+    width: 24px;
+    height: 24px;
+    transition: opacity 0.3s ease;
+  }
+  
+  .redes__sociales img:hover {
+    opacity: 0.7;
+  }
+  
+  .footer__links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  .footer__links li {
+    display: inline-block;
+  }
+  
+  .footer__links a {
+    color: var(--color-primarioDark);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .footer__links a:hover {
+    color:  rgb(105, 121, 248);
+  }
+  
 /*----------------------------------
 Formulario
 ----------------------------------*/
-.formulario-contacto {
+/* Estilos para el contenedor del formulario */
+.form__container {
     width: 100%;
     max-width: 600px;
-    margin: 0 auto;
+    margin: 2rem auto; /* Ajusta el margen para centrar el formulario en la pantalla */
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    min-height: 76vh;
-  }
-  
-  form {
+    min-height: 70vh;
+    background-color: var(--color-primario);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Añade una sombra sutil para resaltar el contenedor */
+    border-radius: 8px; /* Redondea ligeramente las esquinas para una apariencia más moderna */
+}
+
+form {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-  }
-  
-  h1 {
+    padding: 1rem; /* Añade un relleno interior adicional para mejorar la separación */
+    background-color: #fff; /* Fondo blanco para el formulario */
+    border-radius: 4px; /* Redondea ligeramente las esquinas de los formularios */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Añade una sombra para que resalte sobre el fondo */
+}
+
+h1 {
     text-align: center;
-    margin-bottom: 1rem;
-  }
-  
-/*------------------------------------*/
+    margin-bottom: 1.5rem; /* Ajusta el margen inferior para separar el título del resto del contenido */
+    font-size: 24px; /* Cambia el tamaño del título para que sea más legible */
+    color: var(--color-secundario); /* Aplica un color secundario para destacar el título */
+}
+
+/*------------------------------------
+Inicio
+-------------------------------------*/
 .contenedor__inicio {
     display: flex;
     flex-direction: column;
@@ -244,7 +302,7 @@ Formulario
 }
   
 .hero button:hover {
-    background-color: #323232;
+    background-color: var(--color-secundarioDark);
     color: #E6E9F8;
 }
   
@@ -348,4 +406,192 @@ Formulario
 .call-to-action p {
     margin-top: 1.25rem;
     font-size: 1rem;
+}
+
+/*--------------------------
+Destino
+---------------------------*/
+.destino {
+    background-color: var(--color-fondo);
+    padding: 3rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 35rem;
+    min-height: 70vh;
+    width: 75rem;
+    margin: 2rem auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .titulo_destino {
+    font-size: 1.8rem;
+    color: var(--color-primarioDark);
+    margin-bottom: 15px;
+  }
+  
+  .error,
+  .loading {
+    color: var(--color-secundario);
+    font-size: 1rem;
+    margin: 5px 0;
+  }
+  
+  .destino__pais {
+    background-color: var(--color-primarioDark);
+    padding: 12px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .destino__pais:hover {
+    transform: translateY(-3px);
+  }
+  
+  .imagen__destino {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .producto__titulo {
+    font-size: 1.4rem;
+    color: var(--color-primarioDark);
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+  }
+  
+  .btn-pais {
+    margin-top: 8px;
+  }
+  
+  .btn-anterior,
+  .btn-siguiente {
+    margin: 0 5px;
+  }
+  
+  .pagination__info {
+    font-size: 1rem;
+    color: var(--color-secundario);
+  }
+   
+/*---------------------
+Itinerario
+-----------------------*/
+
+/* Estilos generales para el contenedor */
+.itinerario-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrar horizontalmente */
+    justify-content: flex-start; /* Alinear al inicio verticalmente */
+    height: calc(82vh - 60px); /* Altura completa de la ventana menos la altura del header */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-top: 1rem; /* Espacio entre el header y la caja */
+    
+}
+
+/* Estilo para el título */
+.itinerario-container h2 {
+    margin-bottom: 20px; /* Espaciado debajo del título */
+    color: #333; /* Color del texto */
+}
+
+/* Estilo para el campo de entrada */
+.itinerario-input {
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    margin-bottom: 10px; /* Espaciado debajo del campo de entrada */
+    width: 30rem; /* Ancho del campo de entrada */
+}
+
+/* Estilo para el botón de agregar */
+.itinerario-button {
+    padding: 10px 15px;
+    background-color:var(--color-primario); /* Color de fondo */
+    color: var(--color-primarioDark);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 20px; /* Espaciado debajo del botón */
+}
+
+.itinerario-button:hover {
+    background: rgb(105, 121, 248); 
+    color: #FCFCFC;
+    transform: translateY(-2px);
+}
+
+/* Estilo para la lista */
+.itinerario-list {
+    list-style-type: none; /* Quitar viñetas */
+    padding: 1rem;
+ /* Espaciado encima de la lista */
+    width: 40rem; /* Ancho de la lista */
+}
+
+/* Estilo para cada elemento de la lista */
+.itinerario-list li {
+    display: flex;
+    justify-content: space-between; /* Espacio entre el texto y el botón de eliminar */
+    padding: 1rem; /* Espaciado interno */
+    border-bottom: 1px solid var(--color-primarioDark); /* Línea divisoria */
+
+}
+
+/* Estilo para el botón de eliminar */
+.itinerario-delete-button {
+    background-color: #dc3545; /* Color de fondo rojo */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 5px 10px; /* Espaciado interno */
+}
+
+.itinerario-delete-button:hover {
+    background-color: #c82333; /* Color al pasar el mouse */
+}
+
+
+/*-------------------------
+responsive
+--------------------------*/
+
+@media (max-width: 800px) {
+    .encabezado {
+    gap: 2rem;
+    }
+
+    .nav__menu {
+        width: 100%; /* Ancho completo */
+        flex-direction: row; /* Mantener en fila */
+        align-items: center; /* Centrar elementos */
+    }
+}
+
+@media (width<=600px){
+    .footer{
+        flex-direction: column;
+        align-items: center;
+    }
 }

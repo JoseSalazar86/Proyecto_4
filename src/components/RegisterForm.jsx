@@ -39,7 +39,8 @@ const RegisterForm = () => {
   });
 
   return (
-    <Box>
+    <Box Box className="form__container">
+      <h1>Registrarse</h1>
       <Formik
         initialValues={{ email: 'test@test.com', password: '123456', confirmPassword: '' }}
         onSubmit={onSubmit}

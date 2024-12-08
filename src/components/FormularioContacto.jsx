@@ -2,7 +2,6 @@ import React from "react";
 import { TextField, Button, MenuItem, Box } from "@mui/material";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import "./FormularioContacto.css"; // Estilos en archivo CSS externo
 
 const FormularioContacto = () => {
   const validationSchema = Yup.object({
@@ -26,7 +25,7 @@ const FormularioContacto = () => {
   };
 
   return (
-    <Box className="form-container">
+    <Box className="form__container">
       <h1>Formulario de Contacto</h1>
       <Formik
         initialValues={{

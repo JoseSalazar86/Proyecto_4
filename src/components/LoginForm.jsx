@@ -9,7 +9,6 @@ import { LoadingButton } from '@mui/lab';
 
 const LoginForm = () => {
   const { user } = useContext(UserContext);
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,11 +18,15 @@ const LoginForm = () => {
   const onSubmit = async ({ email, password }, { setSubmitting, setErrors, resetForm }) => {
     try {
       await login({ email, password });
-      console.log('User logged in');
+      console.log('User  logged in');
       resetForm();
     } catch (error) {
       if (error.code === 'auth/invalid-credential') {
         return setErrors({ credentials: 'Credenciales inválidas' });
+      } else if (error.code === 'auth/user-not-found') {
+        return setErrors({ credentials: 'No se encontró el usuario' });
+      } else {
+        return setErrors({ credentials: 'Error al iniciar sesión. Inténtalo de nuevo.' });
       }
     } finally {
       setSubmitting(false);
@@ -36,7 +39,8 @@ const LoginForm = () => {
   });
 
   return (
-    <Box>
+    <Box className="form__container">
+      <h1>Iniciar Sesion</h1>
       <Formik
         initialValues={{ email: 'test@test.com', password: '123456' }}
         onSubmit={onSubmit}
@@ -56,6 +60,7 @@ const LoginForm = () => {
               label="Introduce el email"
               error={errors.email && touched.email}
               helperText={errors.email && touched.email && errors.email}
+              fullWidth
             />
 
             {/* Campo Password */}
@@ -70,6 +75,7 @@ const LoginForm = () => {
               label="Introduce el password"
               error={errors.password && touched.password}
               helperText={errors.password && touched.password && errors.password}
+              fullWidth
             />
 
             {/* Botón de Acceso */}
@@ -78,12 +84,13 @@ const LoginForm = () => {
               type="submit"
               disabled={isSubmitting}
               loading={isSubmitting}
+              fullWidth
             >
               Acceder
             </LoadingButton>
 
             {/* Botón de Registro */}
-            <Button component={Link} to="/Register" type="submit" disabled={isSubmitting}>
+            <Button component={Link} to="/Register" type="button" disabled={isSubmitting} fullWidth>
               ¿No tienes cuenta? Regístrate
             </Button>
 

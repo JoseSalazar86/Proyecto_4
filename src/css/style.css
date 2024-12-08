@@ -10,6 +10,8 @@
     --color-primario: rgba(176, 187, 234, 1);
     --color-secundario: rgba(230, 233, 248, 1);
     --color-fondo: rgba(210, 217, 252, 1);
+    --corlor-primarioDark:rgba(30, 30, 30, 1);
+    --color-secundarioDark:rgba(50, 50, 50, 1);
     --color-sombra: rgba(0, 0, 0, 0.1); /* Color de sombra */
 }
 
@@ -75,7 +77,6 @@ Header
 /*----------------------------------
 Botones de login y registro
 ----------------------------------*/
-.btn -------------------------------*/
 .btn {
     background: var(--color-primario);
     border: none;
@@ -181,10 +182,170 @@ Button
 /*----------------------------------
 Formulario
 ----------------------------------*/
-.form-container{
+.formulario-contacto {
+    width: 100%;
     max-width: 600px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-height: 76vh;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+/*------------------------------------*/
+.contenedor__inicio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 2rem;
-    background: radial-gradient(circle, var(--color-primario), var(--color-secundario));
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    
+    gap: 3rem; /* Espaciado entre las secciones del main */
+}
+
+.hero {
+    text-align: center;
+    padding: 3rem 2rem; /* Más padding para separar contenido */
+    background-color: #E6E9F8;
+    color: #1E1E1E;
+    margin-bottom: 3rem; /* Separación con la siguiente sección */
+}
+  
+.hero h1 {
+    font-family: 'Insland Momenta', serif;
+    font-size: 3rem;
+    margin-bottom: 1.25rem;
+}
+  
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+}
+  
+.hero button {
+    background-color: #B0BBEA;
+    color: #FCFCFC;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+.hero button:hover {
+    background-color: #323232;
+    color: #E6E9F8;
+}
+  
+/* Features Section */
+.features {
+    padding: 3rem 2rem; /* Más padding para la sección */
+    background-color: #FCFCFC;
+    text-align: center;
+    margin-bottom: 3rem; /* Separación con la siguiente sección */
+}
+  
+.features h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem; /* Espaciado mayor */
+    color: #1E1E1E;
+}
+  
+.features article {
+    display: inline-block;
+    width: calc(25% - 2rem); /* Más separación lateral */
+    margin: 1rem; /* Espaciado adicional entre artículos */
+    vertical-align: top;
+    text-align: center;
+    padding: 1.25rem; /* Relleno interno */
+    box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.1); /* Opcional: efecto de sombra */
+    border-radius: 0.5rem; /* Opcional: esquinas redondeadas */
+}
+  
+.features img {
+    max-width: 6.25rem; /* 100px → 6.25rem */
+    margin-bottom: 1rem;
+}
+  
+.features h3 {
+    font-size: 1.25rem;
+    color: #323232;
+}
+
+/* Benefits Section */
+.benefits {
+    padding: 3rem 2rem; /* Más espacio interno */
+    background-color: #B0BBEA;
+    color: #FCFCFC;
+    margin-bottom: 3rem; /* Separación con la siguiente sección */
+}
+  
+.benefits h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+  
+.benefits article {
+    display: inline-block;
+    width: calc(33.33% - 2rem); /* Más separación lateral */
+    margin: 1rem; /* Espaciado adicional entre artículos */
+    vertical-align: top;
+    text-align: center;
+    padding: 1.25rem;
+    box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+}
+  
+.benefits img {
+    max-width: 6.25rem; /* 100px → 6.25rem */
+    margin-bottom: 1rem;
+}
+  
+.benefits h3 {
+    font-size: 1.25rem;
+}
+
+/* Call to Action Section */
+.call-to-action {
+    text-align: center;
+    padding: 3rem 2rem; /* Más padding interno */
+    background-color: #E6E9F8;
+    color: #1E1E1E;
+}
+  
+.call-to-action h2 {
+    font-size: 2rem;
+    margin-bottom: 1.25rem;
+}
+  
+.call-to-action button {
+    background-color: #323232;
+    color: #FCFCFC;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+.call-to-action button:hover {
+    background-color: #1E1E1E;
+    color: #B0BBEA;
+}
+  
+.call-to-action p {
+    margin-top: 1.25rem;
+    font-size: 1rem;
 }

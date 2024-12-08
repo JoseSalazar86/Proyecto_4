@@ -1,9 +1,10 @@
 import React from 'react'
+import Inicio from '../components/Inicio'
 //api key
 const Home = () => {
   return (
     <div>
-      <h1 className='h1__page'>Bienvenidos</h1>
+      <Inicio/>
     </div>
 
   )

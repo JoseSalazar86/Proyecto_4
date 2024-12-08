@@ -1,159 +1,132 @@
 import React from "react";
-import { Avatar, Box, TextField, Button, MenuItem} from "@mui/material";
+import { TextField, Button, MenuItem, Box } from "@mui/material";
 import { Formik } from "formik";
-import * as Yup from "yup"; // Importamos Yup para validaciones
-
-
+import * as Yup from "yup";
+import "./FormularioContacto.css"; // Estilos en archivo CSS externo
 
 const FormularioContacto = () => {
- // Validaciones con Yup
- const validationSchema = Yup.object({
-  nombre: Yup.string()
-    .required("El nombre es obligatorio")
-    .min(2, "El nombre debe tener al menos 2 caracteres"),
-  apellido: Yup.string()
-    .required("El apellido es obligatorio")
-    .min(2, "El apellido debe tener al menos 2 caracteres"),
-  email: Yup.string()
-    .email("Debe ser un email válido")
-    .required("El email es obligatorio"),
-  asunto: Yup.string().required("Selecciona un asunto"),
-  cajaTexto: Yup.string()
-    .required("La consulta es obligatoria")
-    .min(10, "La consulta debe tener al menos 10 caracteres"),
-});
+  const validationSchema = Yup.object({
+    nombre: Yup.string()
+      .required("El nombre es obligatorio")
+      .min(3, "El nombre debe tener al menos 3 caracteres"),
+    apellido: Yup.string()
+      .required("El apellido es obligatorio")
+      .min(4, "El apellido debe tener al menos 4 caracteres"),
+    email: Yup.string()
+      .email("Debe ser un email válido")
+      .required("El email es obligatorio"),
+    asunto: Yup.string().required("Selecciona un asunto"),
+    cajaTexto: Yup.string()
+      .required("La consulta es obligatoria")
+      .min(10, "La consulta debe tener al menos 10 caracteres"),
+  });
 
-// Acción al enviar el formulario
-const onSubmit = (values) => {
-  console.log("Datos enviados:", values);
-};
+  const onSubmit = (values) => {
+    console.log("Datos enviados:", values);
+  };
 
   return (
-    <>
-    <h1>Contacto</h1>
-    <Box className="form-container"> 
-   
-    {/* Formulario con Formik */}
-    <Formik
-      initialValues={{
-        nombre: "",
-        apellido: "",
-        email: "",
-        asunto: "",
-        cajaTexto: "",
-      }}
-      onSubmit={onSubmit}
-      validationSchema={validationSchema}
-    >
-      {({
-        values,
-        handleChange,
-        handleSubmit,
-        handleBlur,
-        errors,
-        touched,
-        isSubmitting,
-      }) => (
-        <Box
-          component={"form"}
-          onSubmit={handleSubmit}
-         
-        >
-          {/* Campo Nombre */}
-          <TextField
-            type="text"
-            value={values.nombre}
-            onChange={handleChange}
-            name="nombre"
-            onBlur={handleBlur}
-            id="nombre"
-            label="Introduce tu Nombre"
-            error={Boolean(errors.nombre && touched.nombre)}
-            helperText={touched.nombre && errors.nombre}
-          />
-
-          {/* Campo Apellido */}
-          <TextField
-            type="text"
-            placeholder="Apellidos"
-            value={values.apellido}
-            onChange={handleChange}
-            name="apellido"
-            onBlur={handleBlur}
-            id="apellido"
-            label="Introduce tus Apellidos"
-            fullWidth
-            error={Boolean(errors.apellido && touched.apellido)}
-            helperText={touched.apellido && errors.apellido}
-          />
-
-          {/* Campo Email */}
-          <TextField
-            type='text'
-            placeholder='email@email.com'
-            value={values.email}
-            onChange={handleChange}
-            name='email'
-            onBlur={handleBlur}
-            id='email'
-            label='Introduce el email'
-            fullWidth
-            error={errors.email && touched.email}
-            helperText={errors.email && touched.email && errors.email}
-          />
-
-          {/* Campo Asunto */}
-          <TextField
-            select
-            label="Selecciona un Asunto"
-            name="asunto"
-            value={values.asunto}
-            onChange={handleChange}
-            onBlur={handleBlur}
-
-            error={Boolean(errors.asunto && touched.asunto)}
-            helperText={touched.asunto && errors.asunto}
-          >
-            <MenuItem value="">Selecciona un asunto</MenuItem>
-            <MenuItem value="otros">Otros</MenuItem>
-            <MenuItem value="guardar_perfil">Guardar perfil</MenuItem>
-            <MenuItem value="pagina_busqueda">Página de búsqueda</MenuItem>
-            <MenuItem value="problema_itinerario">Problemas al cargar tu itinerario</MenuItem>
-            <MenuItem value="problema_inicio_sesion">Problemas al iniciar sesión</MenuItem>
-            <MenuItem value="olvido_contrasena">Olvidó su contraseña</MenuItem>
-          </TextField>
-
-          {/* Campo Consulta */}
-          <TextField
-            multiline
-            rows={4}
-            placeholder="Describe tu consulta"
-            value={values.cajaTexto}
-            onChange={handleChange}
-            name="cajaTexto"
-            onBlur={handleBlur}
-            id="cajaTexto"
-            label="Consulta"
-            fullWidth
-            error={Boolean(errors.cajaTexto && touched.cajaTexto)}
-            helperText={touched.cajaTexto && errors.cajaTexto}
-          />
-
-          {/* Botón Enviar */}
-          <Button
-            type="submit"
-            variant="contained"
-            fullWidth
-            disabled={isSubmitting}
-          >
-            Enviar
-          </Button>
-        </Box>
-      )}
-    </Formik>
-  </Box>
-  </>
-  )
-}
+    <Box className="form-container">
+      <h1>Formulario de Contacto</h1>
+      <Formik
+        initialValues={{
+          nombre: "",
+          apellido: "",
+          email: "",
+          asunto: "",
+          cajaTexto: "",
+        }}
+        onSubmit={onSubmit}
+        validationSchema={validationSchema}
+      >
+        {({
+          values,
+          handleChange,
+          handleSubmit,
+          handleBlur,
+          errors,
+          touched,
+          isSubmitting,
+        }) => (
+          <Box component="form" onSubmit={handleSubmit} className="form-box">
+            <TextField
+              label="Nombre"
+              name="nombre"
+              value={values.nombre}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={Boolean(errors.nombre && touched.nombre)}
+              helperText={touched.nombre && errors.nombre}
+              className="form-field"
+            />
+            <TextField
+              label="Apellido"
+              name="apellido"
+              value={values.apellido}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={Boolean(errors.apellido && touched.apellido)}
+              helperText={touched.apellido && errors.apellido}
+              className="form-field"
+            />
+            <TextField
+              label="Correo Electrónico"
+              name="email"
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={Boolean(errors.email && touched.email)}
+              helperText={touched.email && errors.email}
+              className="form-field"
+            />
+            <TextField
+              select
+              label="Asunto"
+              name="asunto"
+              value={values.asunto}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={Boolean(errors.asunto && touched.asunto)}
+              helperText={touched.asunto && errors.asunto}
+              className="form-field"
+            >
+              <MenuItem value="">Selecciona un asunto</MenuItem>
+              <MenuItem value="otros">Otros</MenuItem>
+              <MenuItem value="guardar_perfil">Guardar perfil</MenuItem>
+              <MenuItem value="pagina_busqueda">Página de búsqueda</MenuItem>
+              <MenuItem value="problema_itinerario">
+                Problemas al cargar tu itinerario
+              </MenuItem>
+              <MenuItem value="problema_inicio_sesion">
+                Problemas al iniciar sesión
+              </MenuItem>
+              <MenuItem value="olvido_contrasena">Olvidó su contraseña</MenuItem>
+            </TextField>
+            <TextField
+              label="Consulta"
+              name="cajaTexto"
+              value={values.cajaTexto}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              multiline
+              rows={4}
+              error={Boolean(errors.cajaTexto && touched.cajaTexto)}
+              helperText={touched.cajaTexto && errors.cajaTexto}
+              className="form-field"
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              disabled={isSubmitting}
+              className="form-button"
+            >
+              Enviar
+            </Button>
+          </Box>
+        )}
+      </Formik>
+    </Box>
+  );
+};
 
 export default FormularioContacto;

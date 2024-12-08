@@ -12,7 +12,6 @@ dist
 dist-ssr
 *.local
 
-josesalazar86.github.io
 
 # Editor directories and files
 .vscode/*

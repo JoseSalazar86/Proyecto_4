@@ -3,7 +3,7 @@ import React from 'react'
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 
-const Layoutprivate = () => {
+const LayoutPrivate = () => {
     const {user} = useContext(UserContext)
     const navigate = useNavigate()
 
@@ -18,4 +18,4 @@ const Layoutprivate = () => {
     );
 };
 
-export default Layoutprivate
+export default LayoutPrivate

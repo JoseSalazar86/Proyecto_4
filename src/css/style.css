@@ -48,7 +48,24 @@ Header
     box-shadow: 0 2px 10px var(--color-sombra); /* Sombra en el encabezado */
     flex-wrap: wrap; /* Para hacer el header responsive */
 }
-
+.header-right {
+    display: flex; /* Mostrar el contenido a la derecha en línea */
+    align-items: center; /* Centrar verticalmente */
+  }
+  
+  .user-info {
+    display: flex; /* Mostrar el ícono y el nombre en línea */
+    align-items: center; /* Centrar verticalmente */
+    margin-left: 15px; /* Espacio entre el ícono y el nombre */
+    position: absolute;
+    right: 3rem;
+    top: 4rem;
+  }
+  .profile-icon {
+    font-size: 70rem; /* Cambia este valor al tamaño que desees */
+    margin-right: 10px; /* Espacio entre el ícono y el nombre */
+  }
+  
 .cabecera__tituloh1 {
     font-family: "Island Moments", cursive;
     color: var(--color-primarioDark);

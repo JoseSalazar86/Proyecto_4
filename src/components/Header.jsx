@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Logo from "../assets/Logo.png";
+import { UserContext } from '../context/UserContext'; // Asegúrate de tener el contexto de usuario
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'; // Importa el ícono de perfil
 
 const Header = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -8,15 +10,9 @@ const Header = () => {
     return savedMode ? JSON.parse(savedMode) : false;
   });
 
+  const [submenuVisible, setSubmenuVisible] = useState(false); // Estado para el submenú
   const navigate = useNavigate();
-
-  const handleLogin = () => {
-    navigate('/login');
-  };
-
-  const handleRegister = () => {
-    navigate('/register');
-  };
+  const { user, logOut } = useContext(UserContext); // Obtener el usuario y la función de logout del contexto
 
   const toggleDarkMode = () => {
     setIsDarkMode(prevMode => !prevMode);
@@ -27,6 +23,15 @@ const Header = () => {
     document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
     localStorage.setItem('theme', JSON.stringify(isDarkMode));
   }, [isDarkMode]);
+
+  const toggleSubmenu = () => {
+    setSubmenuVisible(prev => !prev);
+  };
+
+  const handleLogout = () => {
+    logOut(); // Llama a la función de logout
+    setSubmenuVisible(false); // Oculta el submenu después de hacer logout
+  };
 
   return (
     <header className="encabezado">
@@ -53,13 +58,34 @@ const Header = () => {
         <span className="darkMode-slider"></span>
       </label>
 
-      {/* Botones de navegación */}
-      <button className="btn btn__login" onClick={handleLogin}>
-        Iniciar Sesión
-      </button>
-      <button className="btn btn__register" onClick={handleRegister}>
-        Registrarse
-      </button>
+      {/* Botones de navegación o ícono de perfil */}
+      <div className="header-right">
+        {user ? (
+          <div className="user-info">
+            <AccountCircleIcon className="profile-icon" style={{ fontSize: 70 }} onClick={toggleSubmenu} />
+            {submenuVisible && (
+              <div className="submenu">
+                <NavLink to="/perfil" className="submenu-link" onClick={() => setSubmenuVisible(false)}>
+                  Perfil
+                </NavLink>
+                <NavLink className="submenu-link" onClick={handleLogout}>
+                  Logout
+                </NavLink>
+              </div>
+            )}
+            <span>{user.username}</span>
+          </div>
+        ) : (
+          <div>
+            <button className="btn btn__login" onClick={() => navigate('/login')}>
+              Iniciar Sesión
+            </button>
+            <button className="btn btn__register" onClick={() => navigate('/register')}>
+              Registrarse
+            </button>
+          </div>
+        )}
+      </div>
     </header>
   );
 }

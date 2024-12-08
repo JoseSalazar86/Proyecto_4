@@ -1,8 +1,11 @@
 import React from 'react'
+import UserPerfil from '../components/UserPerfil.jsx';
 
 const Perfil = () => {
   return (
-    <div>Perfil</div>
+    <>
+    <UserPerfil/>
+    </>
   )
 }
 
